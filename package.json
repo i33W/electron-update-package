@@ -1,20 +1,20 @@
 {
   "name": "electron-darkmode",
   "version": "1.0.0",
-  "description": "Electron Dark mode practice!",
+  "description": "Using 'update-electron-app' package practice!",
   "main": "main.js",
   "scripts": {
     "start": "electron ."
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/i33W/electron-darkmode.git"
+    "url": "git+https://github.com/i33W/electron-update-package.git"
   },
   "author": "hwang bomee <hwangbomee@kakao.com>",
   "bugs": {
-    "url": "https://github.com/i33W/electron-darkmode/issues"
+    "url": "https://github.com/i33W/electron-update-package/issues"
   },
-  "homepage": "https://github.com/i33W/electron-darkmode#readme",
+  "homepage": "https://github.com/i33W/electron-update-package#readme",
   "devDependencies": {
     "electron": "^16.0.7"
   }
