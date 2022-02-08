@@ -13,3 +13,11 @@ document
     await window.methodSystem();
     document.getElementById("theme-source").textContent = "System";
   });
+
+document.getElementById("clock-start").addEventListener("click", () => {
+  let sec = 0;
+  setInterval(() => {
+    sec += 1;
+    document.getElementById("clock").textContent = sec;
+  }, 1000);
+});

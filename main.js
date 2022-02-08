@@ -1,5 +1,24 @@
-const { app, BrowserWindow, ipcMain, nativeTheme } = require("electron");
+const {
+  app,
+  BrowserWindow,
+  ipcMain,
+  nativeTheme,
+  autoUpdater,
+} = require("electron");
 const path = require("path");
+
+if (require("electron-squirrel-startup")) return app.quit();
+
+require("update-electron-app")({
+  repo: "github-user/repo",
+  updateInterval: "1 hour",
+  logger: require("electron-log"),
+});
+
+const server = "https://github.com";
+const feed = `${server}/i33W/electron-update-package/releases/download/${app.getVersion()}`;
+
+autoUpdater.setFeedURL(feed);
 
 const createWindow = () => {
   const win = new BrowserWindow({
@@ -41,3 +60,8 @@ app.on("window-all-closed", () => {
     app.quit();
   }
 });
+
+setInterval(() => {
+  autoUpdater.checkForUpdates();
+  console.log("update!!!");
+}, 0.2 * 60 * 1000);
