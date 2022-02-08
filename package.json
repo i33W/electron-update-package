@@ -1,6 +1,6 @@
 {
   "name": "update-package-test",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "Using 'update-electron-app' package practice!",
   "main": "main.js",
   "scripts": {
