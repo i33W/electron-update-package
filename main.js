@@ -3,22 +3,23 @@ const {
   BrowserWindow,
   ipcMain,
   nativeTheme,
-  autoUpdater,
+  // autoUpdater,
 } = require("electron");
+const elog = require("electron-log");
 const path = require("path");
 
 if (require("electron-squirrel-startup")) return app.quit();
 
 require("update-electron-app")({
-  repo: "github-user/repo",
-  updateInterval: "1 hour",
-  logger: require("electron-log"),
+  repo: "i33W/electron-update-package",
+  updateInterval: "5 minutes",
+  logger: elog,
 });
 
 const server = "https://github.com";
 const feed = `${server}/i33W/electron-update-package/releases/download/${app.getVersion()}`;
 
-autoUpdater.setFeedURL(feed);
+// autoUpdater.setFeedURL(feed);
 
 const createWindow = () => {
   const win = new BrowserWindow({
@@ -43,16 +44,30 @@ const createWindow = () => {
   ipcMain.handle("system", () => {
     nativeTheme.themeSource = "system";
   });
+
+  return win;
 };
 
 app.whenReady().then(() => {
-  createWindow();
+  const win = createWindow();
 
-  app.on("activate", () => {
-    if (BrowserWindow.getAllWindows().length === 0) {
-      createWindow();
-    }
-  });
+  elog.info("ok?");
+
+  // app.on("activate", () => {
+  //   if (BrowserWindow.getAllWindows().length === 0) {
+  //     createWindow();
+  //   }
+  // });
+
+  // setInterval(() => {
+  //   win.webContents.send("log", "interval");
+  //   try {
+  //     autoUpdater.checkForUpdates();
+  //     win.webContents.send("log", "autoUpdater.checkForUpdates()");
+  //   } catch (error) {
+  //     win.webContents.send("log", error);
+  //   }
+  // }, 0.2 * 60 * 1000);
 });
 
 app.on("window-all-closed", () => {
@@ -60,8 +75,3 @@ app.on("window-all-closed", () => {
     app.quit();
   }
 });
-
-setInterval(() => {
-  autoUpdater.checkForUpdates();
-  console.log("update!!!");
-}, 0.2 * 60 * 1000);

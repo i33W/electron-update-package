@@ -11,3 +11,8 @@ contextBridge.exposeInMainWorld("methodToggle", () =>
 contextBridge.exposeInMainWorld("methodSystem", () =>
   ipcRenderer.invoke("system")
 );
+
+ipcRenderer.on("log", (event, arg) => {
+  console.log(arg);
+  document.getElementById("log-div").innerHTML += arg + "<br>";
+});
